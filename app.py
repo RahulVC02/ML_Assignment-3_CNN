@@ -75,11 +75,6 @@ st.write("---")
 
 
 model = VGG16(weights='imagenet', include_top=True)
-mel_spec = librosa.feature.melspectrogram(y = audio, sr=22050, n_fft=2048, hop_length=1024, n_mels=128)
-mel_spec_db = librosa.power_to_db(mel_spec, ref=np.max)
-input_shape = (224, 224)
-resized_mel_spec = cv2.resize(mel_spec_db, input_shape)
-
 resized_mel_spec_rgb = np.stack((resized_mel_spec,) * 3, axis=-1)
 resized_mel_spec_rgb = resized_mel_spec_rgb - resized_mel_spec_rgb.min()
 resized_mel_spec_rgb = resized_mel_spec_rgb / resized_mel_spec_rgb.max()
